@@ -72,7 +72,7 @@ public:
         } 
     }
 
-    //implemento la funzione findSlot
+    // Implemento la funzione findSlot.
     int findSlot(int hash){
      return(hash%TABLE_SIZE);
     }
