@@ -11,14 +11,14 @@ private:
 
     Entry table[TABLE_SIZE];
 
-    // Funzione hash di base
-    int hashFunction(const std::string key) const {
-        int hash = 0;
-        for (char ch : key) {
-            hash = (hash * 31 + ch) % TABLE_SIZE; // Algoritmo di hashing semplice
-        }
-        return hash;
+    // Funzione hash modificata
+    int hashFunction(const std::string& key) const {
+    int hash = 0;
+    for (char ch : key) {
+        hash += static_cast<int>(ch);
     }
+    return hash % TABLE_SIZE;
+}
 
 public:
     // Metodo per aggiungere una coppia chiave-valore
@@ -26,8 +26,7 @@ public:
         int index = hashFunction(key);
 
         if (table[index].isOccupied) {
-            std::cerr << "Collision detected for key: " << key << " at index " << index << ". Not handling collisions.\n";
-            return;
+            index=findSlot(index);
         }
 
         table[index].key = key;
@@ -71,6 +70,11 @@ public:
         } else{
              return(false); 
         } 
+    }
+
+    //implemento la funzione findSlot
+    int findSlot(int hash){
+     return(hash%TABLE_SIZE);
     }
 };
     
