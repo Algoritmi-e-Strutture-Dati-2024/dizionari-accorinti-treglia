@@ -40,8 +40,12 @@ public:
 
         if (table[index].isOccupied && table[index].key == key) {
             return table[index].value;
+        } else if (table[index].isOccupied && table[index].key != key){
+            index= findSlot(index);
+            if (table[index].isOccupied && table[index].key == key){
+                return table[index].value;
+            }
         }
-
         return "Key not found!";
     }
 
@@ -58,7 +62,11 @@ public:
         int index = hashFunction(key);
         if (table[index].isOccupied) {
              table[index].isOccupied = false;
-        } else{
+        } else if(table[index].isOccupied && table[index].key != key){
+            index= findSlot(index);
+            if (table[index].isOccupied){
+                table[index].isOccupied = false;
+        }else{
             std::cout<< "chiave non trovata"<< std::endl; 
         } 
     }
@@ -67,7 +75,11 @@ public:
         int index = hashFunction(key);
         if (table[index].isOccupied && table[index].key == key) {
              return(true);
-        } else{
+        } else if(table[index].isOccupied && table[index].key != key){
+            index= findSlot(index);
+            if (table[index].isOccupied && table[index].key == key) {
+             return(true);
+        }else{
              return(false); 
         } 
     }
