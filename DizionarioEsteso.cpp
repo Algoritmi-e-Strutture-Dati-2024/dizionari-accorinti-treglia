@@ -54,6 +54,23 @@ public:
             }
         }
     }
-
     //metodo per cancellare una coppia dato il valore della chiave
+    void cancella(const std::string key){
+        int index = hashFunction(key);
+        if (table[index].isOccupied) {
+             table[index].isOccupied = false;
+        } else{
+            std::cout<< "chiave non trovata"<< std::endl; 
+        } 
+    }
+    //metodo per verificare se una chiave è presente nel dizionario
+    bool appartiene(const std::string key){
+        int index = hashFunction(key);
+        if (table[index].isOccupied && table[index].key == key) {
+             return(true);
+        } else{
+             return(false); 
+        } 
+    }
 };
+    
